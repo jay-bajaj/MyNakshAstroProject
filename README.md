@@ -1,5 +1,15 @@
 # MyNaksh
 
+## Configuration
+
+Copy the example file to `.env` and replace the placeholder values with your local settings:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+For Google AI Studio, set `LLM_PROVIDER=google` and provide the API key locally. Use `LLM_PROVIDER=stub` to run without an LLM key. `.env` is gitignored; never commit real API keys or database credentials.
+
 ## Architecture
 
 The FastAPI endpoint and terminal client both call the LangGraph chat workflow. The graph analyzes each query, retrieves selected Neo4j context, generates a response with the configured LLM provider, and extracts durable memory updates.
