@@ -26,6 +26,12 @@ class Neo4jClient:
             "FOR (user:User) REQUIRE user.user_id IS UNIQUE",
             database_=self.settings.neo4j_database,
         )
+        self._get_driver().execute_query(
+            "CREATE CONSTRAINT memory_user_key_unique IF NOT EXISTS "
+            "FOR (memory:MemoryItem) "
+            "REQUIRE (memory.user_id, memory.key) IS UNIQUE",
+            database_=self.settings.neo4j_database,
+        )
 
     def get_recent_messages(self, user_id: str, limit: int = 5) -> list[str]:
         rows = self.run_query(
