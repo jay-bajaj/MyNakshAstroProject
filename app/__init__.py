@@ -1,0 +1,1 @@
+"""MyNaksh application package."""
